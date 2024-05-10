@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SportStore.Models.Product>
+<div style="margin-top:-10px"></div>
+@using (Html.BeginForm("SearchOption", "CustomerProducts"))
+{
+    <div class="w3-content w3-display-container">
+    <img class="mySlides" src="~/Content/Images/banner1.png" style="width:100%">
+    <img class="mySlides" src="~/Content/Images/banner2.png" style="width:100%">
+    <img class="mySlides" src="~/Content/Images/banner3.png" style="width:100%">
+    <img class="mySlides" src="~/Content/Images/banner4.png" style="width:100%">
+    <img class="mySlides" src="~/Content/Images/banner5.png" style="width:100%">
+</div>
+<script>
+    var slideIndex = 0;
+    carousel();
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) { slideIndex = 1 }
+        x[slideIndex - 1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+</script>
+<br />
+    <h2 style="margin-left: 10px">DANH SÁCH SẢN PHẨM</h2>
+    <text>Từ</text>
+    <input type="number" name="min" />
+    <text>Đến</text>
+    <input type="number" name="max" />
+    <input type="submit" value="Search" />
+    <div class="container" style="margin-top: 20px">
+        <div class="row">
+            @foreach (var sanpham in Model)
+            {
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card h-100">
+                        <img class="card-img-top"
+                             src="@Url.Content(sanpham.ImagePro)">
+                        <div class="card-body" style="text-align: center">
+                            <h5 class="card-title">@sanpham.NamePro</h5>
+                            <p class="card-text">@sanpham.Price <b>VNĐ</b></p>
+                            <a href="/ShoppingCart/AddToCart/@sanpham.ProductID" class="btn btn-danger"> Mua </a>
+                            @Html.ActionLink("CHI TIẾT", "Details", new { id = sanpham.ProductID }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+

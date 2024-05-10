@@ -1,0 +1,109 @@
+﻿@model SportStore.Models.Customer
+
+@{
+    ViewBag.Title = "RegisterUser";
+    Layout = null;
+}
+<style>
+    body {
+        background: #DDD8D3;
+    }
+
+    .regislabel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .wraplable {
+        float: left;
+        width: 45%;
+        min-height: 750px;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+
+    .contentmd {
+        margin-left: 5px;
+    }
+
+    #middles {
+        margin-block: auto;
+        margin-inline: auto;
+        float: right;
+        width: 50%;
+        background: white;
+        min-height: 500px;
+        border: 2px solid black;
+        border-radius: 30px;
+        padding: 5px;
+    }
+</style>
+<div class="wraplable">
+    <a class="navbar-brand ps-3" href="~/home/home">
+        <img class="img-fluid sp-custom-118-1628235565" src="~/Content/Images/logobrand.png" width="150" alt="FoxPRO" style="margin-bottom: 5px !important;">
+    </a>
+    <div class="regislabel">
+        <h1 style=" font-family: 'Brush Script MT'; font-size: 100px;">
+            Xin chào <br /> Quý khách
+        </h1>
+        <p>Tạo tài khoản FoxPRO để đăng nhập vào tất cả trang web của FoxPRO và đối tác nhanh chóng!</p>
+    </div>
+</div>
+<div id="middles">
+    @using (Html.BeginForm("RegisterUser", "login", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="contentmd">
+        <h1 style="text-align:center;">ĐĂNG KÝ</h1>
+        @Html.AntiForgeryToken()
+        <h3>@Html.LabelFor(model => model.AccountCus)</h3>
+        <p>@Html.TextBoxFor(model => model.AccountCus, new { @style = "width: 100%; padding:10px;", placeholder = "Tên đăng nhập vào website" })</p>
+        <p>@Html.ValidationMessageFor(model => model.AccountCus)</p>
+
+        <h3>@Html.LabelFor(model => model.NameCus)</h3>
+        <p>@Html.TextBoxFor(model => model.NameCus, new { @style = "width: 100%; padding:10px;", placeholder = "Nhập họ và tên" })</p>
+        <p>@Html.ValidationMessageFor(model => model.NameCus)</p>
+
+        <h3>@Html.LabelFor(model => model.PassCus)</h3>
+        <p>@Html.PasswordFor(model => model.PassCus, new { @style = "width: 100%; padding:10px;", placeholder = "Nhập mật khẩu" })</p>
+        <p>@Html.ValidationMessageFor(model => model.PassCus)</p>
+
+        <h3>@Html.LabelFor(model => model.ConfirmPass)</h3>
+        <p>@Html.PasswordFor(model => model.ConfirmPass, new { @style = "width: 100%; padding:10px;" })</p>
+        <p>@Html.ValidationMessageFor(model => model.ConfirmPass)</p>
+        @if (ViewBag.ErrorRegister != null)
+        {
+            <p style="color:red;font-weight:bold;">@ViewBag.ErrorRegister</p>
+        }
+
+        <h3>@Html.LabelFor(model => model.Address)</h3>
+        <p>@Html.TextBoxFor(model => model.Address, new { @style = "width: 100%; padding:10px;", placeholder = "Nhập địa chỉ" })</p>
+        <p>@Html.ValidationMessageFor(model => model.Address)</p>
+
+        <h3>@Html.LabelFor(model => model.PhoneCus)</h3>
+        <p>@Html.TextBoxFor(model => model.PhoneCus, new { @style = "width: 100%; padding:10px;", placeholder = "Nhập SĐT" })</p>
+        <p>@Html.ValidationMessageFor(model => model.PhoneCus)</p>
+
+        <h3>@Html.LabelFor(model => model.EmailCus)</h3>
+        <p>@Html.TextBoxFor(model => model.EmailCus, new { @style = "width: 100%; padding:10px;", placeholder = "Nhập email (ví dụ:abc@gmail.com)" })</p>
+        <p>@Html.ValidationMessageFor(model => model.EmailCus)</p>
+        <div style="margin-bottom:10px;padding:5px;">
+            @Html.RadioButtonFor(model => model.Gender, true)
+            <span>Male</span>
+
+            @Html.RadioButtonFor(model => model.Gender, false)
+            <span>Female</span>
+        </div>
+
+        <input type="submit" value="TẠO TÀI KHOẢN" style="padding: 10px; width: 100%; background: #2E2E2E; color: white; border-radius: 30px; " />
+    </div>
+    }
+    @using (Html.BeginForm("loginuser", "login"))
+    {
+        <input type="submit" value="BẠN ĐÃ CÓ TÀI KHOẢN? ĐĂNG NHẬP NGAY" style="padding: 10px; width: 100%; background: #00699E; color: white; border-radius: 30px; " />
+    }
+</div>
+

@@ -1,0 +1,50 @@
+﻿@model SportStore.Models.Customer
+@{
+    ViewBag.Title = "CusInfo";
+    Layout = null;
+}
+<style>
+    .Greetcus {
+        float: left;
+        min-height: 500px;
+        border-right: 2px solid grey;
+        width: 30%;
+    }
+
+    .circle {
+        background: #456BD9;
+        clip-path: circle(50%);
+        height: 10em;
+        width: 10em;
+    }
+
+    .infocus {
+    }
+</style>
+<div class="Greetcus">
+    <a href="@Url.Action("home","home")">
+        <center><img class="img-fluid sp-custom-118-1628235565" src="~/Content/Images/logobrand.png" alt="FoxPRO" width="180" style="margin-bottom: 5px !important;"></center>
+    </a>
+    <center><img src="~/Content/Images/download.jpg" alt="Alternate Text" class="circle" /></center>
+    <center>@Session["NameUser"]</center>
+</div>
+<div class="infocus">
+    <h2>THÔNG TIN TÀI KHOẢN</h2>
+    <hr />
+    <h1>Thông tin đăng nhập</h1>
+    <hr />
+    Số điện thoại : @Session["Phone"]
+    <hr />
+    Email : @Session["Email"]
+    <hr />
+    <h1>Thông tin cá nhân</h1>
+    <hr />
+    Họ và tên : @Session["NameUser"]
+    <hr />
+    Giới tính : @if ((bool)Session["Gender"] == true)
+    {<span>Nam</span> }
+    else
+    {<span>Nữ</span>}
+    <hr />
+    Địa chỉ : @Session["Address"]
+</div>

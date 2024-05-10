@@ -1,0 +1,112 @@
+﻿@model SportStore.Models.Customer
+
+@{
+    ViewBag.Title = "LoginUser";
+    Layout = null;
+}
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<link href="/Assets/client/css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script src="~/Scripts/script.js"></script>
+<link href="~/Content/detailstyle.css" rel="stylesheet" />
+<style>
+    body {
+        background: #E7F3F9;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+
+    #middle {
+        padding-bottom: 100px;
+        border: solid 1px blue;
+        border-radius: 30px;
+        background-color: deepskyblue;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0 30% 0 30%;
+    }
+
+    .loginfr {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .labellg {
+        margin-bottom: 2%;
+    }
+
+    .wrapbtn {
+        text-align: center;
+    }
+
+    .btnregis {
+        padding: 5px 50px 5px 50px;
+        margin: 10px 0 0 0;
+    }
+
+    .btnlogin {
+        margin: 10px 0 10px 0;
+        padding: 5px;
+    }
+
+    #imgbanner img {
+        width: 100%;
+        height: 200px;
+    }
+
+    #imgbanner {
+        margin-bottom: 10px;
+    }
+</style>
+<div style="text-align: center">
+    <a class="navbar-brand ps-3" href="~/home/home">
+        <img class="img-fluid sp-custom-118-1628235565" src="~/Content/Images/logobrand.png" width="150" alt="FoxPRO" style="margin-bottom: 5px !important;">
+    </a>
+</div>
+
+<div id="middle" style="background-color:ghostwhite">
+    <h2 style="text-align:center">ĐĂNG NHẬP</h2>
+    @using (Html.BeginForm("LoginAccount", "Login"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="loginfr">
+            <h3 class="labellg">@Html.LabelFor(model => model.AccountCus)</h3>
+            <div>@Html.TextBoxFor(model => model.AccountCus, new { style = "field-validation-error" })</div>
+            <div>@Html.ValidationMessageFor(model => model.AccountCus)</div>
+
+            <h3 class="labellg">@Html.LabelFor(model => model.PassCus)</h3>
+            <div>@Html.EditorFor(model => model.PassCus)</div>
+            <div>@Html.ValidationMessageFor(model => model.PassCus)</div>
+            @if (ViewBag.ErrorInfo != null)
+            {
+                <p style="color:red;font-weight:bold;">@ViewBag.ErrorInfo</p>
+            }
+
+            <div><input class="btnlogin" type="submit" value="Đăng nhập"></div>
+        </div>
+    }
+    <div class="wrapbtn">
+        <a href="~/Login/LoginAdmin">
+            <button class="btnregis">Đăng nhập dưới quyền admin</button>
+        </a>
+    </div>
+    <hr />
+    <h3 style="text-align:center;">
+        Hoặc
+    </h3>
+    <hr />
+    <p style="text-align:center">Bạn chưa có tài khoản? Hãy đăng ký lẹ tay nào!</p>
+    @using (Html.BeginForm("RegisterUser", "Login"))
+    {
+        <div class="wrapbtn">
+            <button class="btnregis" onclick="location.assign = '~/Login/RegisterUser';">Tạo tạo khoản</button>
+        </div>
+    }
+</div>
+
+
+
+

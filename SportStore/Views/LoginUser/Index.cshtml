@@ -1,0 +1,83 @@
+﻿@model SportStore.Models.Customer
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<style>
+    .field-validation-error {
+        color: red;
+    }
+
+    #middle {
+        padding-bottom: 100px;
+        border: solid 1px blue;
+        background-color: deepskyblue;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0 30% 0 30%;
+    }
+
+    .loginfr {
+        padding: 10px;
+    }
+
+    .labellg {
+        margin-bottom: 2%;
+    }
+
+    .wrapbtn {
+        text-align: center;
+    }
+
+    .btnregis {
+        padding: 5px 50px 5px 50px;
+        margin: 10px 0 0 0;
+    }
+
+    .btnlogin {
+        margin: 10px 0 10px 0;
+    }
+</style>
+<a href="~/CustomerProducts/Index"><div style="justify-content:center;display:flex;"><img class="img-fluid sp-custom-118-1628235565" src="~/Content/Images/logobrand.png" width="150" alt="FoxPRO" style="margin-bottom: 5px !important;"></div></a>
+<div id="middle" style="background-color:ghostwhite">
+    <h2 style="text-align:center">ĐĂNG NHẬP</h2>
+    @using (Html.BeginForm("LoginAccount", "LoginUser"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="loginfr">
+            <h3 class="labellg">Tên user</h3>
+            <div>@Html.TextBoxFor(model => model.NameCus, new { style = "field-validation-error" })</div>
+            <div>@Html.ValidationMessageFor(model => model.NameCus)</div>
+
+            <h3 class="labellg">@Html.LabelFor(model => model.PassCus)</h3>
+            <div>@Html.EditorFor(model => model.PassCus)</div>
+            <div>@Html.ValidationMessageFor(model => model.PassCus)</div>
+            @if (ViewBag.ErrorInfo != null)
+            {
+                <p style="color:red;font-weight:bold;">@ViewBag.ErrorInfo</p>
+            }
+
+            <div><input class="btnlogin" type="submit" value="Login"></div>
+        </div>
+    }
+    <div class="wrapbtn"> <a href="~/loginuser/loginadmin">
+        <button class="btnregis">Đăng nhập dưới quyền admin</button></a>
+    </div>
+    <hr />
+    <h3 style="text-align:center;">
+        Hoặc
+    </h3>
+    <hr />
+    <p style="text-align:center">Bạn chưa có tài khoản? Hãy đăng ký lẹ tay nào!</p>
+    @using (Html.BeginForm("RegisterUser", "LoginUser"))
+    {
+        <div class="wrapbtn">
+            <button class="btnregis" onclick="location.assign = '~/LoginUser/RegisterUser';">Tạo tạo khoản</button>
+        </div>
+    }
+
+</div>
+
+
+

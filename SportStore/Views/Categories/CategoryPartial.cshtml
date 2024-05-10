@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SportStore.Models.Category>
+
+<style>
+    #div-u {
+        margin-left: -20px;
+        margin-top: 60px;
+        background-color: none;
+        text-decoration: none;
+    }
+
+    .div-cate {
+        height: 20px;
+        width: 100%;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .div-cate a:hover {
+        text-decoration: none;
+    }
+
+</style>
+<ul style="list-style-type: none" id="div-u">
+    @{
+        <h5 class="sb-sidenav-menu-heading" style="color: black; text-align:center; margin-top: -50px">Danh Mục Sản Phẩm</h5>
+        <hr />
+        foreach (var item in Model)
+        {
+            <li class="div-cate">
+                @Html.ActionLink(item.NameCate, "Homecate", "Home", new {category =item.IDCate.Trim() }, "")
+            </li>
+            <hr />
+        }
+    }
+</ul>
+
+

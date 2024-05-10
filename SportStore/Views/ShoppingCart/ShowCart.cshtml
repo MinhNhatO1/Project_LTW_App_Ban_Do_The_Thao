@@ -1,0 +1,83 @@
+﻿@model SportStore.Models.Cart
+
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+    <h2>Giỏ Hàng</h2>
+    <table class="table-bordered">
+        <thead style="text-align:center; font-size:large;">
+            <tr>
+                <th>Tên Sản phẩm</th>
+                <th>Hình</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Lệnh</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item._quantity * (decimal)item._product.Price.Value;
+                <tr>
+                    <td width="350">@Html.DisplayFor(model => item._product.NamePro)</td>
+                    <td><img src="@Url.Content(item._product.ImagePro)" width="100" height="110" /></td>
+                    <td width="100" align="right"> @Html.DisplayFor(model => item._product.Price)</td>
+                    <td align="right">
+                        @using (Html.BeginForm("Update_Cart_Quantity", "ShoppingCart"))
+                        {
+                            <input type="hidden" value="@item._product.ProductID" name="idPro" />
+                            <input type="number" min="1" value="@item._quantity" name ="carQuantity" style="text-align:right" />
+                            <input type="submit" value="Cập nhật" />
+                        }
+                    </td>
+                    <td width="100" align="right">@total.ToString("#,##0").Replace(',', '.')</td>
+                    <td>
+                        <a href="~/ShoppingCart/RemoveCart/@item._product.ProductID" class="btn-dark">- Xóa -</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" style="text-align:right; font-size:x-large; color: crimson;">
+                    Tổng tiền : @Model.Total_money().ToString("#,##0").Replace(',', '.') Đồng
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="4">
+                    @using (Html.BeginForm("CheckOut", "ShoppingCart"))
+                    {
+                        <table style="border-collapse:separate; border-spacing:5px;">
+                            
+                                <table>
+                                    <tr>
+                                        <td> Tên khách hàng : </td>
+                                        <td> <input type="text" name="NameCustomer" required /></td>
+                                    </tr>
+                                    <tr>
+                                        <td> Số điện thoại : </td>
+                                        <td> <input type="number" name="PhoneCustomer" required /></td>
+                                    </tr>
+                                    <tr>
+                                        <td> Địa chỉ giao hàng : </td>
+                                        <td> <input type="text" name="AddressDeliverry" required /></td>
+                                    </tr>
+                                    <tr>
+                                </table>
+                                <input type="submit" value="Đặt hàng" class="btn btn-success" style="margin-right:5px;" />
+                                <a href="@Url.Action("RegisterUser", "Login")" class="btn btn-success">Đăng ký</a>
+                            
+
+                        </table>
+                    }
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+<a href="@Url.Action("Home", "Home")" class="btn btn-outline-dark" style="width:200px; margin-top:10px;"> Tiếp tục Mua hàng</a>
+
+

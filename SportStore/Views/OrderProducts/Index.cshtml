@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SportStore.Models.OrderPro>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div style="margin-left: 70px; margin-top: 30px">
+    <h2>DANH SÁCH CÁC ĐƠN HÀNG</h2>
+    <table class="table table-bordered" style="border-width:thick">
+        <tr>
+            <th> Ngày giao hàng </th>
+            <th> Địa chỉ </th>
+            <th> Tên khách hàng</th>
+            <th> Số điện thoại</th>
+            <th> Lệnh</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.DateOrder)</td>
+                <td> @Html.DisplayFor(modelItem => item.AddressDeliverry) </td>
+                <td> @Html.DisplayFor(modelItem => item.NameCus)</td>
+                <td> @Html.DisplayFor(modelItem => item.PhoneCus)</td>
+                <td>
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

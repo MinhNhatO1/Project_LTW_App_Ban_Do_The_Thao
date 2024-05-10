@@ -1,0 +1,31 @@
+﻿@model SportStore.Models.Product
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<div class="row" style="margin-top: 30px;margin-left: 50px; margin-right:10px">
+    <div class="col-lg-5" id="imgpro">
+        <h3>CHI TIẾT SẢN PHẨM</h3>
+        <img src="@Url.Content(Model.ImagePro)" alt="Alternate Text" height="350" />
+    </div>
+    <div class="col-lg-7" id="detailspro">
+        <h5>Loại sản phẩm : @Html.DisplayFor(modelItem => Model.Category1.NameCate)</h5>
+        <hr />
+        <h4>@Model.NamePro</h4>
+        <hr />
+        Giá bán : <span style="color:red; font-size:24px;">
+            @Model.Price VNĐ
+        </span>
+        <hr />
+        <p style="text-align: justify">
+            <span style="font-weight: bold">Mô tả :</span> @Model.DecriptionPro
+        </p>
+        <hr />
+        <div><p>Số lượng : @Model.Quantity</p></div>
+        <div>
+            <a class="btn btn-primary" href="@Url.Action("AddToCart", "ShoppingCart", new { id = Model.ProductID })">
+                ĐẶT MUA
+            </a>
+        </div>
+    </div>
+</div>
